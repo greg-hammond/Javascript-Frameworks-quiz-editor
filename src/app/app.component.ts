@@ -13,5 +13,7 @@ export class AppComponent {
 
   borderRadius = '8px';
 
+  toolTipText = `The color is ${this.propName}`;
 
+  someHtmlString = '<h1>attribute binding in da haus</h1>'
 }
