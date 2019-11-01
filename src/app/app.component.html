@@ -23,10 +23,33 @@
 
     </div>
 
-    <div class="col-md-8">
+    <div 
+      class="col-md-8"
+      *ngIf="selectedQuiz == undefined"
+    >
+      <div class="card bg-light text-center">
+        <div class="card-body">
+          <h5 class="card-title">
+            No Quiz Selected
+          </h5>
+          <p class="card-text">
+            Please select or add a new quiz...
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div 
+      class="col-md-8"
+      *ngIf="selectedQuiz != undefined" 
+    >
+
       <button class="btn btn-outline-dark mb-3">
         Save Quizzes
       </button>
+
       <button class="btn btn-link mb-3">
           Cancel
       </button>
@@ -38,7 +61,7 @@
         </div>
 
         <div class="card-body">
-          Coming Soon!
+          {{ selectedQuiz.name }}
         </div>
 
       </div>
@@ -46,7 +69,7 @@
       <div class="card mb-3">
 
           <div class="card-header">
-            General
+            Questions
           </div>
   
           <div class="card-body">
@@ -58,7 +81,7 @@
         <div class="card mb-3">
 
             <div class="card-header">
-              General
+              Other
             </div>
     
             <div class="card-body">
