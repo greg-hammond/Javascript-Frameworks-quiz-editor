@@ -1,0 +1,7 @@
+.quiz-item {
+    cursor: pointer;
+}
+
+.quiz-item:not(.active):hover {
+    background-color:#f8f8f8;
+}
