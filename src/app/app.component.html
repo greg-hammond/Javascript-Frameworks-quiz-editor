@@ -4,13 +4,13 @@
 
     <div class="col-md-4">
 
-      <button class="btn btn-outline-success mb-3">
+      <button class="btn btn-outline-success mb-3" (click)='addQuiz()'>
         Add New Quiz
       </button>
 
       <div class="list-group mb-3">
         <div 
-          class="list-group-item d-flex justify-content-between align-items-center"
+          class="quiz-item list-group-item d-flex justify-content-between align-items-center"
           *ngFor="let q of quizzes"  
           (click)="selectQuiz(q)"
           [class.active]="q == selectedQuiz"
@@ -62,7 +62,27 @@
         </div>
 
         <div class="card-body">
-          {{ selectedQuiz.name }}
+
+          <!-- ADD QUIZ NAME EDIT HERE -->
+          <!--
+            todo: seems like we should put focus on this input field when we 
+            create a new quiz. how?
+          -->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Quiz Name:</span>
+            </div>
+
+            <input type="text" class="form-control" 
+              name="QuizName" id="QuizName" 
+              [(ngModel)]="selectedQuiz.name"                        
+            />
+
+          </div>
+
+          <!-- {{ selectedQuiz.name }}  -->
+
+
         </div>
 
       </div>

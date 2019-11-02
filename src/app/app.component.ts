@@ -27,5 +27,19 @@ export class AppComponent {
   }
 
 
+  addQuiz() {
+
+    const newQuiz = {
+      name: 'Untitled Quiz',
+      questionCount: 0
+    };
+
+    // is this any different/better than using .push(newQuiz) ??
+    this.quizzes = [...this.quizzes, newQuiz];
+
+    this.selectedQuiz = newQuiz;
+
+  }
+
 
 }
