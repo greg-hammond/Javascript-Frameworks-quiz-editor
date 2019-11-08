@@ -22,13 +22,40 @@ export class AppComponent implements OnInit {
   // usually, constructors are used solely for DI
   constructor(private qSvc: QuizService) {}
 
+  failedToLoadQuizzes = false;
+
   ngOnInit() {
-    this.quizzes = this.qSvc
+    
+    //this.quizzes = [];
+    
+    this.qSvc
       .loadQuizzes()
-      .map( x => ({ 
-        name: x.name
-        , temporaryQuestionCount: x.questionCount
-      }));
+      .subscribe(
+        
+        data => {
+          console.log(data);
+          // +1: data is cast to an array of any.
+          // since it's cast as an array, we now have .map
+          // this is ugly, but it makes typescript happy....
+          // will get to a 'better way' in the future..?
+          this.quizzes = (<any[]> data).map(x => ({
+            name: x.name
+            , temporaryQuestionCount: x.questions.length
+          }));
+        },
+
+        error => {
+          console.error(error.error);
+          this.failedToLoadQuizzes = true;
+        }
+      
+
+
+      );
+      // .map( x => ({ 
+      //   name: x.name
+      //   , temporaryQuestionCount: x.questionCount
+      // }));
   }
 
   title = 'quiz-editor';
