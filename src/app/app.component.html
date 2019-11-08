@@ -9,21 +9,22 @@
       </button>
 
       <div class="list-group mb-3">
-        <div 
+        <button
           class="quiz-item list-group-item d-flex justify-content-between align-items-center"
           *ngFor="let q of quizzes"  
           (click)="selectQuiz(q)"
           [class.active]="q == selectedQuiz"
-          
         >
+        
           {{ q.name }}
-        <small
-          class="font-italic font-weight-lighter"
-          [class.text-danger]="q.questionCount == 0 && q != selectedQuiz"
-        >
-          {{ q.questionCount }} question(s)
-        </small> 
-        </div>
+          <small
+            class="font-italic font-weight-lighter"
+            [class.text-danger]="q.questionCount == 0 && q != selectedQuiz"
+          >
+            {{ q.questionCount }} question(s)
+          </small> 
+        </button>
+
       </div>
 
     </div>
