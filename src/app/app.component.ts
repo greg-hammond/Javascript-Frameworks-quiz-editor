@@ -5,7 +5,7 @@ import { QuizService } from './quiz.service';
 // add an interface here !
 interface QuizDisplay {
   name: string;
-  tempCount: number;
+  temporaryQuestionCount: number;
 
 }
 
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
       .loadQuizzes()
       .map( x => ({ 
         name: x.name
-        , tempCount: x.questionCount
+        , temporaryQuestionCount: x.questionCount
       }));
   }
 
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 
     const newQuiz = {
       name: 'Untitled Quiz',
-      tempCount: 0
+      temporaryQuestionCount: 0
     };
 
     // is this any different/better than using .push(newQuiz) ??
