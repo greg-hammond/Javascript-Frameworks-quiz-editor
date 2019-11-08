@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+
+// add an interface here !
+interface QuizDisplay {
+  name: string;
+  tempCount: number;
+
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,11 +23,18 @@ export class AppComponent implements OnInit {
   constructor(private qSvc: QuizService) {}
 
   ngOnInit() {
-    this.quizzes = this.qSvc.loadQuizzes();
+    this.quizzes = this.qSvc
+      .loadQuizzes()
+      .map( x => ({ 
+        name: x.name
+        , tempCount: x.questionCount
+      }));
   }
 
   title = 'quiz-editor';
-  quizzes = [];
+
+  quizzes: QuizDisplay[] = [];
+
   selectedQuiz = undefined;
 
   selectQuiz(q) {
@@ -30,7 +45,7 @@ export class AppComponent implements OnInit {
 
     const newQuiz = {
       name: 'Untitled Quiz',
-      questionCount: 0
+      tempCount: 0
     };
 
     // is this any different/better than using .push(newQuiz) ??
