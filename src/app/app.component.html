@@ -17,7 +17,12 @@
           
         >
           {{ q.name }}
-          <small>{{ q.questionCount }} question(s)</small> 
+        <small
+          class="font-italic font-weight-lighter"
+          [class.text-danger]="q.questionCount == 0 && q != selectedQuiz"
+        >
+          {{ q.questionCount }} question(s)
+        </small> 
         </div>
       </div>
 
@@ -91,6 +96,12 @@
 
           <div class="card-header">
             Questions
+            <span
+              *ngIf="selectedQuiz.questionCount == 0"
+              class="text-danger"
+            >
+              (NO QUESTIONS)
+            </span>
           </div>
   
           <div class="card-body">
