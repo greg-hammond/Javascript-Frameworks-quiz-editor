@@ -114,10 +114,41 @@
             >
               (No Questions)
             </span>
+
+            <button class="btn btn-outline-success" 
+              (click)='addQuestion()'
+              style='margin-left: 25px;'
+            >
+                Add Question
+            </button>
+
           </div>
   
           <div class="card-body">
-            Coming Soon!
+            
+            <div 
+              class="row mb-3"
+              *ngFor="let question of selectedQuiz.questions"
+            >
+
+              <input type='text' 
+                class='form-control col-md-9'
+                placeholder="Enter question..."
+                [(ngModel)]='question.name'
+              />
+
+              <button type="button" 
+                class="btn btn-link"
+                style='margin-left: 20px;'
+                (click)="removeQuestion(question)"
+              >
+                Remove
+              </button>
+
+
+            </div>
+
+
           </div>
   
         </div>
