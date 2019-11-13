@@ -6,7 +6,7 @@ import { QuizService } from './quiz.service';
 interface QuizDisplay {
   name: string;
   temporaryQuestionCount: number;
-
+  questions: string[];
 }
 
 @Component({
@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
           this.quizzes = (<any[]> data).map(x => ({
             name: x.name
             , temporaryQuestionCount: x.questions.length
+            , questions: x.questions
           }));
         },
 
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit {
     const newQuiz = {
       name: 'Untitled Quiz',
       temporaryQuestionCount: 0
+      , questions: []
     };
 
     // is this any different/better than using .push(newQuiz) ??
@@ -83,5 +85,29 @@ export class AppComponent implements OnInit {
     this.selectQuiz(newQuiz);
   }
 
+
+  addQuestion() {
+
+    const newQuestion = {
+      name: ''
+    };
+
+    this.selectedQuiz.questions = [...this.selectedQuiz.questions, newQuestion];
+
+    // why are we maintaining a separate property again?
+    this.selectedQuiz.temporaryQuestionCount = this.selectedQuiz.questions.length;
+
+  }
+
+
+  removeQuestion(q) {
+
+    this.selectedQuiz.questions = 
+      this.selectedQuiz.questions.filter( x => x !== q );
+
+    // why are we maintaining a separate property again?
+    this.selectedQuiz.temporaryQuestionCount = this.selectedQuiz.questions.length;
+
+  }
 
 }
