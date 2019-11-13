@@ -30,9 +30,9 @@
           {{ q.name }}
           <small
             class="font-italic font-weight-lighter"
-            [class.text-danger]="q.temporaryQuestionCount == 0 && q != selectedQuiz"
+            [class.text-danger]="q.questions.length == 0 && q != selectedQuiz"
           >
-            {{ q.temporaryQuestionCount }} question(s)
+            {{ q.questions.length }} question(s)
           </small> 
         </button>
 
@@ -109,7 +109,7 @@
           <div class="card-header">
             Questions
             <span
-              *ngIf="selectedQuiz.temporaryQuestionCount == 0"
+              *ngIf="selectedQuiz.questions.length == 0"
               class="text-danger"
             >
               (No Questions)
@@ -132,22 +132,19 @@
             >
 
               <input type='text' 
-                class='form-control col-md-9'
+                class='form-control col-md-10'
                 placeholder="Enter question..."
                 [(ngModel)]='question.name'
               />
 
               <button type="button" 
                 class="btn btn-link"
-                style='margin-left: 20px;'
                 (click)="removeQuestion(question)"
               >
                 Remove
               </button>
 
-
             </div>
-
 
           </div>
   
