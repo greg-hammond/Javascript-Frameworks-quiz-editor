@@ -32,7 +32,7 @@
             class="font-italic font-weight-lighter"
             [class.text-danger]="q.questions.length == 0 && q != selectedQuiz"
           >
-            {{ q.questions.length }} question(s)
+            {{ q.questions.length }} question<span *ngIf='q.questions.length !=1'>s</span>
           </small> 
         </button>
 
