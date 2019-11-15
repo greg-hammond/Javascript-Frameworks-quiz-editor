@@ -5,7 +5,11 @@ import { QuizService } from './quiz.service';
 // add an interface here !
 interface QuizDisplay {
   name: string;
-  questions: string[];
+  questions: QuestionDisplay[];
+}
+
+interface QuestionDisplay {
+  name: string;
 }
 
 @Component({
@@ -47,8 +51,6 @@ export class AppComponent implements OnInit {
           console.error(error.error);
           this.failedToLoadQuizzes = true;
         }
-      
-
 
       );
 
