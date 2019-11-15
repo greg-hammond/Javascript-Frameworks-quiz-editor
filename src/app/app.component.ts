@@ -117,4 +117,20 @@ export class AppComponent implements OnInit {
   }
 
 
+  async jsPromisesTwo() {
+
+    try {
+      const x = await this.qSvc.getMagicNumberPromise(true);
+      console.log(x);  // x is... 42 (a number) -- not a  promise -- it circumvents the .then() thing.
+  
+      const y = await this.qSvc.getMagicNumberPromise(false);
+      console.log(y);
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+
+  }
+
 }
