@@ -98,6 +98,7 @@ export class AppComponent implements OnInit {
   }
 
 
+  // looking at Promise usage
   jsPromisesOne() {
 
     const x = this.qSvc.getMagicNumberPromise(false);
@@ -116,7 +117,7 @@ export class AppComponent implements OnInit {
 
   }
 
-
+  // looking at async/await usage
   async jsPromisesTwo() {
 
     try {
@@ -133,4 +134,31 @@ export class AppComponent implements OnInit {
 
   }
 
+  // looking at async/await usage
+  async jsPromisesThree() {
+
+    try {
+      const x = this.qSvc.getMagicNumberPromise(true);
+      console.log(x);  // x is... 42 (a number) -- not a  promise -- it circumvents the .then() thing.
+  
+      const y = this.qSvc.getMagicNumberPromise(true);
+      console.log(y);
+
+      const results = await Promise.all([x, y]);    // returns an array of results
+      //const results = await Promise.race([x, y]);     // race returns just ONE result
+      
+      console.log(results);
+
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+
+  }
+
+
+
+
+  
 }
