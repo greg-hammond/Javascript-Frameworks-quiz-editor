@@ -97,4 +97,24 @@ export class AppComponent implements OnInit {
 
   }
 
+
+  jsPromisesOne() {
+
+    const x = this.qSvc.getMagicNumberPromise(false);
+    console.log(x);   // this is a promise, not a number !!!
+
+    x.then(
+      n => {
+        console.log(n);  // now we get a number
+        const y = this.qSvc.getMagicNumberPromise(true);
+        console.log(y); // 
+        y.then( n => console.log(n));
+      }
+    )
+
+    .catch(err => console.error(err));
+
+  }
+
+
 }

@@ -22,5 +22,14 @@ export class QuizService {
     // ];
   }
 
+  getMagicNumberPromise(makeThisPromiseSucceed: boolean): Promise<number> {
+
+    let p = new Promise<number>(
+      (resolve, reject) => makeThisPromiseSucceed ? resolve(42) : reject("failed")
+    );
+
+    return p;
+
+  }
 
 }
