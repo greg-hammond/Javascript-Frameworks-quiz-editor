@@ -7,6 +7,7 @@ interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
   markedForDelete: boolean;
+  expiryDate: string;
 }
 
 interface QuestionDisplay {
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
             , markedForDelete: false
+            , expiryDate: "01/01/2010"
           }));
         },
 
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+    console.log(q.expiryDate);
   }
 
   addQuiz() {
@@ -74,6 +77,7 @@ export class AppComponent implements OnInit {
       name: 'Untitled Quiz',
       questions: [],
       markedForDelete: false
+      ,expiryDate: "2012-12-12"
     };
 
     // is this any different/better than using .push(newQuiz) ??
