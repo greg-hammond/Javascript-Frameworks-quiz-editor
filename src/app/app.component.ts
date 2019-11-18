@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quiz.service';
+import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 
 // add an interface here !
@@ -7,12 +8,13 @@ interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
   markedForDelete: boolean;
-  expiryDate: string;
+  expiryDate: NgbDateStruct;    // { year: , month:, day: }
 }
 
 interface QuestionDisplay {
   name: string;
 }
+
 
 @Component({
   selector: 'app-root',
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
             , markedForDelete: false
-            , expiryDate: "01/01/2010"
+            , expiryDate: {year: 2019, month: 1, day: 1}
           }));
         },
 
@@ -68,7 +70,6 @@ export class AppComponent implements OnInit {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
-    console.log(q.expiryDate);
   }
 
   addQuiz() {
@@ -77,7 +78,7 @@ export class AppComponent implements OnInit {
       name: 'Untitled Quiz',
       questions: [],
       markedForDelete: false
-      ,expiryDate: "2012-12-12"
+      ,expiryDate: {year: 2020, month: 2, day: 22}
     };
 
     // is this any different/better than using .push(newQuiz) ??
@@ -86,6 +87,13 @@ export class AppComponent implements OnInit {
 
     //this.selectedQuiz = newQuiz;
     this.selectQuiz(newQuiz);
+  }
+
+  quizIsExpired(quiz: QuizDisplay): boolean {
+    const today = new Date();
+    // kludge-o-rific.  better way?
+    const todayNgDate = new NgbDate( today.getFullYear(), today.getMonth() + 1, today.getDate() )
+    return todayNgDate.after(quiz.expiryDate);
   }
 
 
@@ -104,6 +112,12 @@ export class AppComponent implements OnInit {
 
   }
 
+
+
+
+
+  // ------------------------------------------------------
+  // promises testing below - nothing else to see here
 
   // looking at Promise usage
   jsPromisesOne() {
