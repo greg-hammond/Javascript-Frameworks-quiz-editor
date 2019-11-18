@@ -181,7 +181,7 @@
     
             <div class="card-body">
               
-              <div class="form-check">
+              <div class="form-check mb-3">
                 <input 
                   type="checkbox" 
                   name="thecheck"
@@ -196,6 +196,39 @@
                   Marked for Delete
                 </label>
               </div>
+
+              <div>
+                <ngb-alert 
+                  *ngIf='quizIsExpired(selectedQuiz)'
+                  [dismissible]="false"
+                >
+                  <strong>Warning!</strong> This quiz is expired!!!  Please remove, or review and update expiration date.
+                </ngb-alert>
+              </div>
+                
+              <div class="input-group mb-3 mt-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Quiz Expires:</span>
+                </div>
+
+                <input type="text" class="form-control" 
+                  ngbDatepicker #expDate="ngbDatepicker"
+                  [(ngModel)]="selectedQuiz.expiryDate"  
+                  #custadapter="ngModel"  
+                />
+
+                <div class="input-group-append">
+                  <button 
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="expDate.toggle()"
+                  >
+                    Choose Date
+                  </button>
+                </div>
+                
+              </div>
+
 
             </div>
     
