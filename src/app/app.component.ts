@@ -35,30 +35,7 @@ export class AppComponent implements OnInit {
     
     //this.quizzes = [];
     
-    this.qSvc
-      .loadQuizzes()
-      .subscribe(
-        
-        data => {
-          console.log(data);
-          // +1: data is cast to an array of any.
-          // since it's cast as an array, we now have .map
-          // this is ugly, but it makes typescript happy....
-          // will get to a 'better way' in the future..?
-          this.quizzes = (<any[]> data).map(x => ({
-            name: x.name
-            , questions: x.questions
-            , markedForDelete: false
-            , expiryDate: {year: 2019, month: 1, day: 1}
-          }));
-        },
-
-        error => {
-          console.error(error.error);
-          this.failedToLoadQuizzes = true;
-        }
-
-      );
+    this.loadQuizzes();
 
   }
 
@@ -67,6 +44,27 @@ export class AppComponent implements OnInit {
   quizzes: QuizDisplay[] = [];
 
   selectedQuiz = undefined;
+
+  private loadQuizzes() {
+    this.qSvc
+      .loadQuizzes()
+      .subscribe(data => {
+        console.log(data);
+        // +1: data is cast to an array of any.
+        // since it's cast as an array, we now have .map
+        // this is ugly, but it makes typescript happy....
+        // will get to a 'better way' in the future..?
+        this.quizzes = (<any[]>data).map(x => ({
+          name: x.name,
+          questions: x.questions,
+          markedForDelete: false,
+          expiryDate: { year: 2019, month: 1, day: 1 }
+        }));
+      }, error => {
+        console.error(error.error);
+        this.failedToLoadQuizzes = true;
+      });
+  }
 
   selectQuiz(q) {
     this.selectedQuiz = q;
@@ -112,8 +110,13 @@ export class AppComponent implements OnInit {
 
   }
 
+  // week 12
+  cancelBatchEdits() {
 
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
 
+  }
 
 
   // ------------------------------------------------------
