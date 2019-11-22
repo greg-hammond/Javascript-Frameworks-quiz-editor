@@ -9,6 +9,7 @@ interface QuizDisplay {
   questions: QuestionDisplay[];
   markedForDelete: boolean;
   expiryDate: NgbDateStruct;    // { year: , month:, day: }
+  newlyAddedQuiz: boolean;
 }
 
 interface QuestionDisplay {
@@ -58,7 +59,9 @@ export class AppComponent implements OnInit {
           name: x.name,
           questions: x.questions,
           markedForDelete: false,
-          expiryDate: { year: 2019, month: 1, day: 1 }
+          expiryDate: { year: 2019, month: 1, day: 1 },
+          newlyAddedQuiz: false
+          
         }));
       }, error => {
         console.error(error.error);
@@ -77,6 +80,7 @@ export class AppComponent implements OnInit {
       questions: [],
       markedForDelete: false
       ,expiryDate: {year: 2020, month: 2, day: 22}
+      ,newlyAddedQuiz: true
     };
 
     // is this any different/better than using .push(newQuiz) ??
@@ -116,6 +120,24 @@ export class AppComponent implements OnInit {
     this.loadQuizzes();
     this.selectedQuiz = undefined;
 
+  }
+
+
+  get numberOfDeletedQuizzes() {
+    return this.getDeletedQuizzes().length;
+  }
+
+  getDeletedQuizzes() {
+    return this.quizzes.filter( x => x.markedForDelete);
+  }
+
+
+  get numberOfAddedQuizzes() {
+    return this.getAddedQuizzes().length;
+  }
+
+  getAddedQuizzes() {
+    return this.quizzes.filter( x => x.newlyAddedQuiz && !x.markedForDelete);
   }
 
 
