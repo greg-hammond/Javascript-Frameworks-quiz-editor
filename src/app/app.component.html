@@ -91,6 +91,7 @@
         class="btn mb-3"
         [class.btn.outline-dark]="numberOfDeletedQuizzes + numberOfAddedQuizzes + numberOfEditedQuizzes === 0"
         [class.btn-dark]="numberOfDeletedQuizzes + numberOfAddedQuizzes + numberOfEditedQuizzes > 0"
+        (click)="saveBatchEdits()"
       >
         Save Quizzes
         <span *ngIf="numberOfDeletedQuizzes > 0"

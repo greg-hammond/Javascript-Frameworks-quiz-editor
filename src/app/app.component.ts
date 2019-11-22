@@ -90,6 +90,7 @@ export class AppComponent implements OnInit {
       markedForDelete: false
       ,expiryDate: {year: 2020, month: 2, day: 22}
       ,newlyAddedQuiz: true
+      ,naiveQuizChecksum: ''
     };
 
     // is this any different/better than using .push(newQuiz) ??
@@ -159,6 +160,19 @@ export class AppComponent implements OnInit {
       .filter( x => this.generateNaiveQuizChecksum(x) != x.naiveQuizChecksum 
         && !x.newlyAddedQuiz 
         && !x.markedForDelete );
+  }
+
+
+  saveBatchEdits() {
+    // SaveQuizzes is an observable, so this doesn't do anything as is.
+    // we need to subscribe !!!!
+    this.qSvc.SaveQuizzes(
+      this.getEditedQuizzes()
+      , this.getAddedQuizzes()
+    ).subscribe(
+      data => console.log('number of changed quizzes submitted: ', data)
+      , err => console.error(err)
+    );
   }
 
   // ------------------------------------------------------
