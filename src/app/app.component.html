@@ -104,6 +104,14 @@
         >
         + {{ numberOfAddedQuizzes }}
         </span>
+        
+        <span *ngIf="numberOfEditedQuizzes > 0"
+          class="badge badge-light ml-1"
+
+        >
+        * {{ numberOfEditedQuizzes }}
+        </span>
+
 
       </button>
 
