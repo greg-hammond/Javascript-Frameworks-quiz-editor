@@ -77,10 +77,10 @@ export class AppComponent implements OnInit {
   }
 
 
-
   selectQuiz(q) {
     this.selectedQuiz = q;
   }
+
 
   addQuiz() {
 
@@ -166,14 +166,52 @@ export class AppComponent implements OnInit {
   saveBatchEdits() {
     // SaveQuizzes is an observable, so this doesn't do anything as is.
     // we need to subscribe !!!!
+
+    // shape our addedQuizData separate from the call, so we
+    // can see what we're doing...
+    // shape data to spec given in week-12-slack-n-tell
+    const addedQuizData = this.getAddedQuizzes().map( x => ({
+      "quizName": x.name,
+      "quizQuestions": x.questions.map( x => x.name)
+    }));
+
+
     this.qSvc.SaveQuizzes(
       this.getEditedQuizzes()
-      , this.getAddedQuizzes()
+      , addedQuizData
     ).subscribe(
-      data => console.log('number of changed quizzes submitted: ', data)
+      data => console.log('number of edited quizzes submitted: ', data)
       , err => console.error(err)
     );
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // ------------------------------------------------------
   // promises testing below - nothing else to see here
